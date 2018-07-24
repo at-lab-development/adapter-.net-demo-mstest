@@ -2,16 +2,17 @@
 using TMNAdapter.MSTest.Tracking.Attributes;
 using TMNAdapter_Demo_MSTest.Common;
 using TMNAdapter.MSTest.Utilities;
+using TMNAdapter.MSTest.Tracking;
 
 namespace TMNAdapter_Demo_MSTest
 {
     [TestClass]
-    public class WebTests : BaseTest
+    public class WebTests
     {
         [TestInitialize]
         public void Initialize()
         {
-            Screenshoter.Initialize(Browser.Instance.GetDriver());
+            Screenshoter.Instance.Initialize(Browser.Instance.GetDriver());
         }
 
         [JiraTestMethod("EPMFARMATS-2466")]
@@ -36,7 +37,7 @@ namespace TMNAdapter_Demo_MSTest
             JiraInfoProvider.SaveParameter("Author", author);
             JiraInfoProvider.SaveParameter("Title", title);
 
-            Screenshoter.TakeScreenshot();
+            Screenshoter.Instance.TakeScreenshot();
 
             Assert.AreEqual("Atlassian", author);
         }
@@ -44,7 +45,7 @@ namespace TMNAdapter_Demo_MSTest
         [TestCleanup]
         public void Close()
         {
-            Screenshoter.Initialize(null);
+            Screenshoter.Instance.CloseScreenshoter();
             Browser.Instance.Quit();
         }
     }

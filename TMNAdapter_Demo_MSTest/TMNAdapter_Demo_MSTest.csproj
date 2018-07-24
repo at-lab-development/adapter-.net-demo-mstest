@@ -64,7 +64,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseTest.cs" />
     <Compile Include="Common\Browser.cs" />
     <Compile Include="Common\YouTubePage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

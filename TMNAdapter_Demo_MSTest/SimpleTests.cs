@@ -1,12 +1,14 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
+using TMNAdapter.Core.Common;
+using TMNAdapter.MSTest.Tracking;
 using TMNAdapter.MSTest.Tracking.Attributes;
 
 namespace TMNAdapter_Demo_MSTest
 {
     [TestClass]
-    public class SimpleTests : BaseTest
+    public class SimpleTests
     {
         [JiraTestMethod("EPMFARMATS-2464")]
         public void TestParametersAdding()
@@ -37,6 +39,12 @@ namespace TMNAdapter_Demo_MSTest
             JiraInfoProvider.SaveAttachment(new FileInfo($@"{AppDomain.CurrentDomain.BaseDirectory}\..\..\Resources\jenkins-oops.jpg"));
 
             Assert.Fail("Testing failed test behavior");
+        }
+
+        [AssemblyCleanup]
+        public static void AssemblyOneTimeCleanup()
+        {
+            TestReporter.GenerateTestResultXml();
         }
     }
 }
